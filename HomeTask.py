@@ -11,7 +11,7 @@ def day(n):
 
     if (n == 6 or n == 7):
              print("Да")
-    if 0 < n < 6:
+    elif 0 < n < 6:
              print("Нет")
     else:
              print('Введите число от 1 до 7')
