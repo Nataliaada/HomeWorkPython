@@ -6,21 +6,21 @@
 #
 # - 6 -> да
 # - 7 -> да
-# - 1 -> нет
-def day(n):
-
-    if (n == 6 or n == 7):
-             print("Да")
-    if 0 < n < 6:
-             print("Нет")
-    else:
-             print('Введите число от 1 до 7')
-try:
-  n = int(input('Введите   чиcло :'))
-  day(n)
-
-except:
-   print('Введитечи число :')
+# # - 1 -> нет
+# def day(n):
+#
+#     if (n == 6 or n == 7):
+#              print("Да")
+#     elif 0 < n < 6:
+#              print("Нет")
+#     else:
+#              print('Введите число от 1 до 7')
+# try:
+#   n = int(input('Введите   чиcло :'))
+#   day(n)
+#
+# except:
+#    print('Введитечи число :')
 
 
 # задача 2. Напишите программу для. проверки истинности утверждения ¬(X ⋁ Y ⋁ Z) = ¬X ⋀ ¬Y ⋀ ¬Z для всех значений предикат.
@@ -74,26 +74,26 @@ except:
 # # Если выполняется деление и второе число равно 0, необходимо выводить строку "Деление на 0!".
 # # Обратите внимание, что на вход программе приходят вещественные числа.
 # #
-# try:
-#
-#     a = float(input('Введите чиcло a: '))
-#     b =  float(input('Введите чиcло b: '))
-#     oper = input('Введите операцию:Поддерживаемые операции: +, -, /, *, mod, pow, div ')
-#     if (b == 0  and oper == '/'):
-#         print('Деление на 0!')
-#     elif oper == '+':
-#       print(a + b)
-#     elif oper == '-':
-#       print(a - b)
-#     elif oper == '*':
-#       print(a * b)
-#     elif oper == '/':
-#       print(a / b)
-#     elif oper == 'mod':
-#       print(a % b)
-#     elif oper == 'pow':
-#       print(a ** b)
-#     elif oper == 'div':
-#       print(a // b)
-# except:
-#     ('Error')
+try:
+
+    a = float(input('Введите чиcло a: '))
+    b =  float(input('Введите чиcло b: '))
+    oper = input('Введите операцию:Поддерживаемые операции: +, -, /, *, mod, pow, div ')
+    if (b == 0  and oper == '/'):
+        print('Деление на 0!')
+    elif oper == '+':
+      print(a + b)
+    elif oper == '-':
+      print(a - b)
+    elif oper == '*':
+      print(a * b)
+    elif oper == '/':
+      print(a / b)
+    elif oper == 'mod':
+      print(a % b)
+    elif oper == 'pow':
+      print(a ** b)
+    elif oper == 'div':
+      print(a // b)
+except:
+    ('Error')
