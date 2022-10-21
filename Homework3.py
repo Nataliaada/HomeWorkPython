@@ -97,5 +97,5 @@ except:
 #  print (*list)
 #
 # except:
-#   print ('Введено не дробное число')
+#   print ('Введено не число')
 
