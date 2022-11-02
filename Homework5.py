@@ -7,81 +7,82 @@
 # Делаем игру против бота
 # а) Подумайте как наделить бота ""интеллектом""
 
-#
-# from random import randint
-#
-# messages = ['Ваша очередь брать конфеты', 'возьмите конфеты',
-#             'сколько конфет возьмёте?', 'берите, не стесняйтесь', 'Ваш ход']
-# def play_game(n, m, players, messages):
-#     count = 0
-#     if n % 10 == 1 and 9 > n > 10:
-#         letter = 'а'
-#     elif 1 < n % 10 < 5 and 9 > n > 10:
-#         letter = 'ы'
-#     else:
-#         letter = ''
-#     while n > 0:
-#         print(f'{players[count % 2]}, {random.choice(messages)}')
-#         move = int(input())
-#         if move > n or move > m:
-#             print(f'Это слишком много, можно взять не более {m} конфет{letter}, у нас всего {n} конфет{letter}')
-#             attempt = 3
-#             while attempt > 0:
-#                 if n >= move <= m:
-#                     break
-#                 print(f'Попробуйте ещё раз, у Вас {attempt} попытки')
-#                 move = int(input())
-#                 attempt -= 1
-#             else:
-#                 return print(f'Очень жаль, у Вас не осталось попыток. Game over!')
-#         n = n - move
-#         if n > 0:
-#             print(f'Осталось {n} конфет{letter}')
-#         else:
-#             print('Все конфеты разобраны.')
-#         count += 1
-#     return players[not count % 2]
-#
-#
-#
-#
-# player1 = input('Давайте познакомися. Первый игрок, как к Вам можно обращаться?\n')
-# player2 = input('Второй игрок, и Вы представьтесь, пожалуйста\n')
-# players = [player1, player2]
-#
-# n = int(input('Сколько конфет будем разыгрывать?\n '))
-# m = int(input('Сколько максимально будем брать конфет за один ход?\n '))
-#
-# winer = play_game(n, m, players, messages)
-# if not winer:
-#     print('У нас нет победителя.')
-# else:
-#     print(f'Поздравляю! В этот раз победил {winer}! Ему достаются все конфеты!')
 
-#
-#
-# def find_best_number(num, count):
-#
-#          return  num % (count+1)
-#
-#
-#
-# try:
-#   k = int(input('Введите количество конфет: '))
-#   maxk = int(input('Введите максимальное количество конфет: '))
-#   print(f"{find_best_number(k, maxk)} конфет нужно взять первому игроку, чтобы забрать все конфеты у своего конкурента")
-#
-#
-# except:
-#   print('Введите  число.')
+from random import randint
+from random import *
+import os
 
 
+message = ('Приветствую!!\n'
+                'Хотите сыграть в игру кому достанется 2021 конфета"?\n'
+                'Правила простые:\n'
+                'У нас на кону 2021 конфета, кто первый начинает определит случай,\n'
+                'за один раз можно взять не больше 28 конфет.\n'
+                'Выигрывает тот, кто последним ходом заберет все конфеты.\n'
+                'Ну что начнем?')
+print(message)
+
+message1 = ['твоя очередь', 'да бери уже', 'бери больше', 'не корову проигрываешь',
+           'бери быстрее', 'да харош, так долго думать уже']
+
+
+def player_vs_player():
+    candies_total = 2021
+    max_take = 28
+    count = 0
+    player_1 = input('\nКак тебя зовут?: ')
+    player_2 = input('\nА твоего соперника?: ')
+
+    print(f'\nНу и так  {player_1} и  {player_2}  начинаем  !\n')
+    print('\nДля начала опеределим кто первый начнет игру.\n')
+
+    x = randint(1, 2)
+    if x == 1:
+        lucky = player_1
+        loser = player_2
+    else:
+        lucky = player_2
+        loser = player_1
+    print(f'Поздравляю {lucky} ты ходишь первым !')
+
+    while candies_total > 0:
+        if count == 0:
+            step = int(input(f'\n{choice(message1)} {lucky} = '))
+            if step > candies_total or step > max_take or step < 0:
+                step = int(input(
+                    f'\nНе жадничай можно взять только {max_take} конфет {lucky}, попробуй еще раз: '))
+            candies_total = candies_total - step
+        if candies_total > 0:
+            print(f'\nна кону еще {candies_total}')
+            count = 1
+        else:
+            print('Все кончились конфетки')
+
+        if count == 1:
+            step = int(input(f'\n{choice(message1)}, {loser} '))
+            if step > candies_total or step > max_take:
+                step = int(input(
+                    f'\nНе жадничай можно взять только {max_take} конфет {loser}, попробуй еще раз: '))
+            candies_total = candies_total - step
+        if candies_total > 0:
+            print(f'\nна кону еще {candies_total}')
+            count = 0
+        else:
+            print('Баста, карапузик, кончились конфетки')
+
+    if count == 1:
+        print(f'{loser} ПОБЕДИЛ')
+    if count == 0:
+        print(f'{lucky} ПОБЕДИЛ')
+
+
+player_vs_player()
 
 # задача 2. Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 #
 # Входные и выходные данные хранятся в отдельных текстовых файлах.
-#
-import sys
+# #
+# import sys
 #
 # with open('RLE_1.txt', 'w', encoding='UTF-8') as file:
 #     file.write(input('Напишите текст необходимый для сжатия: '))
@@ -111,6 +112,17 @@ import sys
 #         enconding += str(count) + prev_char
 #         return enconding
 #
+# def decoding(text1):
+#         number = ''
+#         res = ''
+#         for i in range(len(text1)):
+#             if not text1[i].isalpha():
+#                 number += text1[i]
+#             else:
+#                 res = res + text1[i] * int(number)
+#                 number = ''
+#         return res
+#
 #
 # text_compression = rle_encode(my_text)
 #
@@ -118,12 +130,24 @@ import sys
 #     file.write(f'{text_compression}')
 # print(text_compression)
 #
-
+#
+#
+#
+#
+# with open('new_RLE_1.txt', 'r') as file:
+#     my_txt = file.readline()
+#     decodingtext = my_txt.split()
+#
+# decodingtext = decoding(my_txt)
+#
+# with open('new_RLE_2.txt', 'w',) as file:
+#     file.write(f'{decodingtext}')
+# print(decodingtext)
 
 
 
 # задача 3. Напишите программу, удаляющую из текста все слова, содержащие "абв". Функции FIND и COUNT юзать нельзя.
-
+#
 # def delet_word(t):
 #      word = "абв"
 #      lst = [i for i in t.split() if word not in i]
@@ -137,49 +161,4 @@ import sys
 #
 # except:
 #  print(f'Пожалуйста, введите текст ')
-#
-#
-#
-#
-#
 
-# задача 5 необязательная Дан список чисел. Создайте список, в который попадают числа,
-# описывающие максимальную возрастающую последовательность. Порядок элементов менять нельзя.
-#
-# *Пример:*
-#
-# [1, 5, 2, 3, 4, 6, 1, 7] => [1,  7]
-#
-#     [1, 5, 2, 3, 4,  1, 7, 8 , 15 , 1 ] => [1,  5]
-
-
-
-
-from random import randint
-
-
-
-nums = [randint(1, 9) for i in range(10)]
-print('Задан список: ', nums)
-
-
-def get_create(nums):
-    ups = [nums[0]]
-    for i in nums:
-        if i > max(ups):
-            ups.append(i)
-    return ups
-
-
-print('Последовательность: ', get_create(nums))
-
-largest = 0
-index = 0
-
-for i in range(len(nums)):
-    if len(get_create(nums[i:])) > largest:
-        largest = len(get_create(nums[i:]))
-        index = i
-
-print('Итого, создан список: ', nums[index:])
-print('Итого, последовательность: ', get_create(nums[index:]), '\n')
