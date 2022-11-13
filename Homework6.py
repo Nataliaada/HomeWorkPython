@@ -7,11 +7,9 @@ def create_array():
         array.append(array_1)
     return array
 
-
 def print_arr(array):
     for i in range(3):
         print(" ".join(array[i]))
-
 
 def check_win(array):
     win = '-'
@@ -53,12 +51,12 @@ def check_win(array):
 
     return win
 
-
 table = create_array()
 count = 0
 hod = 0
+
 while count < 10:
-    print_arr(table)
+
     if hod == 0:
         try:
             row = int(input('Введите столбец :'))
@@ -67,10 +65,13 @@ while count < 10:
         except:
             print("Некорректный ввод. Вы уверены, что ввели число?")
             continue
+        if table[row - 1][line - 1] != '-':
+            print('Эта клетка занята')
 
-        table[row - 1][line - 1] = 'x'
-        hod = 1
-        count += 1
+        else:
+         table[row - 1][line - 1] = 'x'
+         hod = 1
+         count += 1
         if count > 4:
             if check_win(table) == 'x':
                 break
@@ -85,9 +86,11 @@ while count < 10:
         except:
             print("Некорректный ввод. Вы уверены, что ввели число?")
             continue
-
-        table[row - 1][line - 1] = '0'
-        hod = 0
+        if table[row - 1][line - 1] != '-':
+            print('Эта клетка занята')
+        else:
+         table[row - 1][line - 1] = '0'
+         hod = 0
         count += 1
         if count > 4:
             if check_win(table) == '0':
@@ -95,6 +98,7 @@ while count < 10:
         if count == 9:
             print("Ничья!")
             break
+    print_arr(table)
 if hod == 1:
     print(f'x ПОБЕДИЛ')
 if hod == 0:
